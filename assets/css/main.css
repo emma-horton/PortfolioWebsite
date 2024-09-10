@@ -2539,4 +2539,8 @@ input, select, textarea {
 	.box:hover .hover-card {
 		opacity: 1;
 	}
-			
+
+	.button-container a.button {
+        margin-right: 10px; /* Adjust the margin as needed */
+    }
+	
