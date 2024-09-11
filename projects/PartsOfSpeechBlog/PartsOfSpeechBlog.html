@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>
+			Decoding Language: A Deep Dive into Part of Speech Tagging with Dynamic Algorithms
+        </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../projects.css" />
+		<noscript><link rel="stylesheet" href="../noscript.css" /></noscript>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<!-- <header id="header">
+						<a href="../index.html" class="logo">Massively</a>
+					</header> -->
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="../index.html">Back to Projects</a></li>
+							<!-- <li class="active"><a href="../generic.html">Generic Page</a></li>
+							<li><a href="../elements.html">Elements Reference</a></li> -->
+						</ul>
+						<ul class="icons">
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<span class="date">6th March, 2024</span>
+									<h1>Decoding Language: A Deep Dive into Part of Speech Tagging with Dynamic Algorithms</h1>
+									<p>Comparing the accuracy of part-of-speech tagging using the Eager, Viterbi, and Individually Most Probable Tags algorithms across English, Korean, and Swedish.</p>
+									<p>By Emma Horton</p>
+								</header>
+								<!-- <div class="image main"><img src="../images/pic01.jpg" alt="" /></div>
+								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur sapien risus, commodo eget turpis at, elementum convallis enim turpis, lorem ipsum dolor sit amet nullam.</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus. Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum.</p> -->
+								<body>
+									<div class="container">
+										<!-- <div class="video-container">
+											<iframe width="560" height="315" src="https://www.youtube.com/embed/nWtM6fK3z8U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+										</div> -->
+										<section class="section introduction">
+											<h2>Introduction</h2>
+											<p>In the realm of computational linguistics, understanding each word’s grammatical role through Part-of-Speech (POS) tagging is essential. This process not only aids in syntactic parsing but is also vital for applications such as machine translation and information extraction. For my recent project in the ‘Language and Computation’ module at the University of St Andrews, I delved into the Viterbi algorithm and its efficacy in POS tagging. I aimed to implement and evaluate the Viterbi algorithm alongside two related methods—the Eager and Individually Most Probable Tags algorithms. I compared their effectiveness across three languages—English, Korean, and Swedish—to uncover insights into their morphological and syntactic characteristics.</p>
+										</section>
+										<section class="section data preparation">
+											<h2>Diving into Data: Setting the Stage for POS Tagging</h2>
+											<p>In my journey through computational linguistics, the first step was to gather the right data. I turned to the <a href="https://universaldependencies.org">Universal Dependancies Treebanks</a>, a rich source of linguistically annotated text, and used the conllu Python package to meticulously parse and divide this data into training and test sets. Picture this: each sentence neatly arranged into a 2D list, each word tagged not just with its part of speech but also with markers at both the beginning and the end. Why? To capture those crucial boundary effects that can make or break the transition probability calculations.
+
+												From there, it was all about the numbers. I calculated transmission probabilities by tallying the frequency of POS bigrams, applying Witten-Bell smoothing to deal with the data sparsity. Emission probabilities followed, based on how frequently each word appeared with a particular tag. And to top it all off, I determined the probability of each POS tag starting off a sentence, setting the stage for what was to come. This meticulous preparation was foundational, ensuring that the algorithms had a solid base to work from and promising more accurate tagging results.</p>
+										</section>
+									
+										<section class="section algorithms">
+											<h2>Unpacking the Algorithms</h2>
+											<h3>The Eager Approach</h3>
+											<p>I started with the Eager algorithm—a straightforward, no-frills approach to POS tagging. This method handles one word at a time, determining the most likely tag by considering only the tag of the preceding word and the word itself. In my script, this process unfolds within the <code>eager_algorithm</code> function. For each word, I sift through every possible tag, crunch the numbers by multiplying each tag’s emission probability with the transition probability from the previous tag, and then select the tag with the highest score. It’s all about making the best choice, one step at a time.</p>
+											<p>
+												For those curious about the math behind it, the Eager algorithm relies on a straightforward formula to make these tagging decisions. The formula looks like this:
+											</p>
+											<p>
+												\[\hat {t}_i = \argmax _{t_i} P(t_i \mid \hat {t}_{i-1}) \cdot P(w_i \mid t_i)\]
+											</p>
+												
+											<p>Let me break it down:</p>
+
+											<ul>
+												<li><strong>\(\hat{t}_i\)</strong>: This represents the most likely POS tag for the \(i\)-th word in the sentence. It’s what the algorithm is trying to determine.</li>
+												<li><strong>\(P(t_i \mid \hat{t}_{i-1})\)</strong>: This is the <strong>transition probability</strong>—it tells us how likely the current tag \(t_i\) is, given that the previous word was tagged as \(\hat{t}_{i-1}\). Essentially, it’s about how well the current tag flows from the previous one.</li>
+												<li><strong>\(P(w_i \mid t_i)\)</strong>: This is the <strong>emission probability</strong>, which measures how likely it is that the current word \(w_i\) would be associated with the tag \(t_i\). This helps the algorithm decide which tag makes sense based on the word itself.</li>
+											</ul>
+
+											<p>In essence, for each word, the algorithm selects the tag that maximizes the combination of how well it fits with the previous tag and how well it matches the current word.</p>
+											<!-- <p>🔨 To maximize our workflow, all of our documentation was in Figma and shared Google Drive. We met regularly over Zoom and Discord to brainstorm on FigJam and to communicate the next steps in our process. We agreed on a timeline in which we would complete the project</p>
+											<figure>
+												<img src="images/project_timeline.png" alt="Project Timeline">
+												<figcaption>Project timeline.</figcaption>
+											</figure> -->
+											<h3>The Viterbi Algorithm</h3>
+											<p>Moving on to the Viterbi algorithm, things get a bit more intricate. This algorithm isn’t satisfied with just the immediate context; it looks at the entire sentence to decide the sequence of tags that makes the most sense. In my script, I implement this within the <code>viterbi_algorithm</code> function. It begins by filling a matrix with log probabilities for the first word across all possible tags. It then iterates over each word in the sentence, updating the matrix based on the transition probabilities, emission probabilities, and previously computed log probabilities. Finally, it backtracks from the last word to determine the most probable sequence of tags. To avoid the pitfalls of multiplying very small probabilities—which can cause numerical underflow—I use log probabilities instead. By transforming probabilities into log space, multiplication operations become additions, significantly mitigating the underflow risk. This approach is critical for the Viterbi algorithm's reliability, especially in processing long sentences where the product of many small probabilities would otherwise approach zero.</p>
+											<p>Now let's break down the formula that the Viterbi algorithm uses to find the most likely sequence of tags for a given sentence:</p>
+
+											<p>\[
+											\hat{t}_1 \cdots \hat{t}_n = \arg\max_{t_1 \cdots t_n} \left( \prod_{i=1}^{n} P(t_i \mid t_{i-1}) \cdot P(w_i \mid t_i) \right) \cdot P(t_{n+1} \mid t_n)
+											\]</p>
+
+											<p>Here’s what the terms mean:</p>
+
+											<ul>
+												<li><strong>\(\hat{t}_1 \cdots \hat{t}_n\)</strong>: This represents the most likely sequence of tags for the sentence, from the first word to the last.</li>
+												<li><strong>\(P(t_i \mid t_{i-1})\)</strong>: The <strong>transition probability</strong>, which tells us how likely the current tag \(t_i\) is, given the previous tag \(t_{i-1}\).</li>
+												<li><strong>\(P(w_i \mid t_i)\)</strong>: The <strong>emission probability</strong>, which measures how likely it is that the current word \(w_i\) corresponds to the current tag \(t_i\).</li>
+												<li><strong>\(t_0 = \langle \mathit{s} \rangle\)</strong>: This is the start-of-sentence marker.</li>
+												<li><strong>\(t_{n+1} = \langle /\mathit{s} \rangle\)</strong>: This is the end-of-sentence marker.</li>
+											</ul>
+
+											<p>In simple terms, the Viterbi algorithm finds the sequence of tags that maximizes the product of the transition probabilities (from one tag to the next) and the emission probabilities (how well each word fits its tag) for the entire sentence. It also factors in the start and end markers to ensure the tagging process is coherent from beginning to end.</p>
+											<h3>Individually Most Probable Tags</h3>
+											<p>Lastly, the individually most probable tags algorithm represents the most detailed method in my toolkit. Implemented in the <code>most_probable_tags_algorithm</code> function, this algorithm leverages forward and backward probabilities to optimize the accuracy of POS tagging for each word based on the context provided by the other tags in the sentence. It relies on two support functions, <code>forward_algorithm</code> and <code>backward_algorithm</code>, which compute the forward and backward probabilities for each word being assigned each possible tag.</p>
+											<p>Here’s how it works: The <code>most_probable_tags_algorithm</code> function first calculates the cumulative forward probabilities—those that move from the start of the sentence up to the previous word, factoring in both emission and transition probabilities. Then, it computes the backward probabilities, which run from the end of the sentence to the next word. Using the <code>logsumexp()</code> function, I ensure accurate summation of these probabilities. Finally, by multiplying these summed forward and backward probabilities together, the algorithm identifies the most probable tag for each word.</p>
+
+											<p>In more formal terms, for each \(i\), the algorithm computes:</p>
+
+											<p>\[
+											\hat{t}_i = \arg\max_{t_i} \sum_{t_1 \cdots t_{i-1}, t_{i+1} \cdots t_n} \left( \prod_{i=1}^{n} P(t_i \mid t_{i-1}) \cdot P(w_i \mid t_i) \right) \cdot P(t_{n+1} \mid t_n)
+											\]</p>
+
+											<p>However, computing this directly would be inefficient. Instead, we break it down using forward and backward probabilities, similar to the Baum-Welch algorithm. The result is:</p>
+
+											<p>\[
+											\hat{t}_i = \arg\max_{t_i} \begin{array}{l} \sum_{t_1 \cdots t_{i-1}} \Bigl( \prod_{k=1}^{i} P(t_k \mid t_{k-1}) \cdot P(w_k \mid t_k) \Bigr) \cdot \\[2ex] \sum_{t_{i+1} \cdots t_n} \Bigl( \prod_{k=i+1}^{n} P(t_k \mid t_{k-1}) \cdot P(w_k \mid t_k) \Bigr) \cdot P(t_{n+1} \mid t_n) \end{array}
+											\]</p>
+
+											<p>This formula ensures that we not only consider the context of each word but also maximize the probability of each individual tag, making it a highly robust tagging method.</p>
+										</section>
+										<!-- <section class="section solution">
+											<h2>So what did the final product look like?</h2>
+											<p>The final product, CashSmart, emerged as a fully interactive and clickable mobile app prototype. It offers users a gamified learning environment to enhance financial literacy through engaging modules and video content. Within the app, users can set and track financial goals, monitor their personal finances, and make informed financial decisions. CashSmart also cultivates a supportive community, allowing users to connect, share insights, and support one another, making it not just a tool for financial management but a platform for collaborative growth and empowerment in financial well-being.</p>
+										</section> -->
+										
+										<section class="section evaluation">
+											<h2>Measuring Success: How The Algorithms Stacked Up</h2>
+											<p>When it came to evaluating the algorithms’ performance, accuracy was my guiding star. This straightforward metric was calculated by comparing each algorithm’s predicted tags to the true tags from the test sets, measuring how often each algorithm got it right. I laid out the results in a simple table format, making it easy to see how each algorithm fared across different languages.</p>
+
+											<p>Here’s a snapshot of how each algorithm performed:</p>
+											<table border="1">
+												<thead>
+													<tr>
+														<th>Language</th>
+														<th>Accuracy % Eager</th>
+														<th>Accuracy % Viterbi</th>
+														<th>Accuracy % Individually Most Probable Tags</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>English</td>
+														<td>88.6</td>
+														<td>91.3</td>
+														<td>88.6</td>
+													</tr>
+													<tr>
+														<td>Swedish</td>
+														<td>85.7</td>
+														<td>90.2</td>
+														<td>85.7</td>
+													</tr>
+													<tr>
+														<td>Korean</td>
+														<td>80.8</td>
+														<td>79.2</td>
+														<td>80.8</td>
+													</tr>
+												</tbody>
+												
+											</table>
+											<!-- <caption><strong>Figure 1</strong> – Table of accuracy scores for each algorithm in each given language.</caption> -->
+											<p>Interestingly, the Individually Most Probable Tags algorithm did not surpass the Viterbi algorithm in performance as I had originally anticipated. This result hints at possible implementation issues, warranting a thorough reevaluation to pinpoint any errors or missteps. Consequently, this algorithm was not included in the final discussion.</p>
+										</section>
+										
+										<section class="section discussion">
+											<h2>Deep Dive: Analyzing Algorithm Performance and Linguistic Challenges</h2>
+
+											<h3>Comparing the Performance of Two Algorithms.</h3>
+
+											<b>Why Viterbi Performs Well in English and Swedish, but Falls Short in Korean.</b>
+											<p>English and Swedish both thrive under the Viterbi algorithm, which excels by considering the full context of a sentence. These languages rely on strict word order to define grammatical roles, making Viterbi’s sentence-wide analysis highly effective. However, Korean presents a different challenge. As an agglutinative language, Korean packs a lot of grammatical information directly into word forms through affixes, providing strong independent cues for POS tagging. The flexible word order in Korean reduces the need for a detailed sentence-wide analysis, which is why Viterbi doesn’t perform as well here.</p>
+
+											<!-- <h4>Eager Algorithm had relatively high accuracy across all languages.</h4>
+											<p>The UD Treebank, used for our data, is relatively coarse as it features only 17 tags per language. These tags are grouped into universal categories rather than being language-specific, simplifying the tagging process. With fewer tags to choose from, the probability of correctly identifying a tag increases, making a simpler model like the Eager Algorithm more effective. This model does not need to discern fine morphological distinctions, thereby enhancing the emission probability for each tag and clarifying transition probabilities between tags.</p> -->
+
+											<h3>Comparing Performance Across Languages.</h3>
+
+											<b>English Shows the Highest Accuracy Overall.</b>
+											<p>English’s straightforward morphology, especially when compared to Swedish and Korean, makes it easier for the algorithms to tag accurately. With fewer inflections and affixes to handle, the task is simplified. Plus, the rigid sentence structure in English helps create predictable word sequences, something both the Viterbi and Eager algorithms can easily take advantage of for more reliable tagging results.</p>
+
+											<b>The Challenge with Swedish: A Case for the Viterbi Algorithm.</b>
+											<p>While Swedish isn’t as morphologically complex as Korean, it does have more inflections than English and allows for greater sentence structure variation. This is where the Viterbi algorithm shines. Its ability to analyze entire sentence structures makes it particularly suited for languages like Swedish, where understanding long-distance dependencies between words and tags is key. In comparison, the Eager algorithm struggles to capture these nuances, giving Viterbi the edge.</p>
+											
+											<h3>Unpacking the Challenges of POS Tagging For Korean</h3>
+											<p>Korean posed a significant challenge in POS tagging, with lower accuracy compared to English and Swedish. This is largely due to Korean’s agglutinative nature, where words are formed and grammatical relationships are expressed through numerous affixes. This creates a wide range of possible word forms from a single root, making the tagging process more complex. On the other hand, English and Swedish, being analytical languages, have simpler morphologies. With fewer word forms to manage, it’s much easier to categorize and tag them, leading to higher accuracy.</p>
+										
+											<h2>My Reflections </h2>
+											<h3>Key challenges</h3>
+
+											<b>Cracking the Viterbi Algorithm</b>
+											<p>Building the Viterbi algorithm was no easy feat. The mathematical complexity behind it made the development process challenging. Translating theoretical formulas into workable Python code took multiple iterations and a lot of deep dives into academic resources—lecture notes, textbook pseudocode, and online resources.</p>
+
+											<b>Fine-Tuning the Individually Most Probable Tags Algorithm</b>
+											<p>The Individually Most Probable Tags algorithm presented its own set of difficulties, especially since it wasn’t covered in our classes or textbooks. It demanded a solid grasp of mathematical principles to accurately integrate forward and backward probabilities into a predictive model. This algorithm still has room for improvement, and with further iterations, I believe it can achieve the results I initially expected.</p>
+										</section>
+
+										<section class="section findings">
+											<h2>So What Did I Learn?</h2>
+											<ul>
+												<li><strong>Viterbi vs. Eager Algorithm:</strong>
+													<ul>
+														<li>Viterbi performed better in Swedish and English.</li>
+														<li>Eager had slightly better results in Korean.</li>
+													</ul>
+												</li>
+												<li><strong>Language Accuracy Rankings:</strong>
+													<ul>
+														<li>Highest accuracy observed in English.</li>
+														<li>Swedish showed significant improvement with the Viterbi algorithm.</li>
+														<li>Korean exhibited the lowest accuracy.</li>
+													</ul>
+												</li>
+												<li><strong>Effect of Morphology:</strong>
+													<ul>
+														<li>The simpler morphology in Swedish and English may explain better algorithm performance compared to the complex morphology of Korean.</li>
+													</ul>
+												</li>
+											</ul>
+										</section>
+										
+										<section class="section conclusion">
+											<h2>Looking ahead</h2>
+											<p>Looking ahead, there's a clear opportunity to tailor POS tagging algorithms more effectively for Korean. Leveraging its rich morphological features could enhance accuracy significantly. Ensuring robust POS tagging across all languages is crucial, as it lays the groundwork for more advanced natural language processing applications, from speech generation to language translation.</p>
+										</section>
+
+										<section class="section try-it-out"> 
+											<h2>Try It Out</h2>
+											<p>Curious to see how the algorithms perform in action? Pull the repository and try it for yourself.</p>
+											<a href="https://github.com/emma-horton/PartsOfSpeech/blob/main/README.md" class="btn">Get the Code on GitHub</a>
+										</section>
+
+										<section class="section additional">
+											<h2>Want to find out more?</h2>
+											<p>For a deeper dive into the Viterbi algorithm and its applications in POS tagging, check out the recommended books below:</p>
+											<div class="recommended-books">
+												<!-- <h3>Recommended Books</h3> -->
+												<div class="book">
+													<img src="images/speech_and_nlp.jpeg" alt="Speech and language processing : an introduction to natural language processing, computational linguistics, and speech recognition.<">
+													<h4>Speech and language processing : an introduction to natural language processing, computational linguistics, and speech recognition.</h4>
+													<p>Jurafsky, D. and Martin, J.H.</p>
+													<a href="https://web.stanford.edu/~jurafsky/slp3/ed3book.pdf">Access online</a>
+												</div>
+												<div class="book">
+													<img src="images/nlp_with_python.jpeg" alt="Natural language processing with Python">
+													<h4>Natural language processing with Python</h4>
+													<p>Bird, S., Klein, E. and Loper, E.</p>
+													<a href="https://www.nltk.org/book/">Access online</a>
+												</div>
+												<!-- Add more books as needed -->
+											</div>
+										</section>
+
+									</div>
+								</body>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<!-- <footer id="footer">
+						<section>
+							<form method="post" action="#">
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="field">
+										<label for="email">Email</label>
+										<input type="text" name="email" id="email" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="3"></textarea>
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+						</section> -->
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p>1234 Somewhere Road #87257<br />
+								Nashville, TN 00000-0000</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="#">(000) 000-0000</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">info@untitled.tld</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
