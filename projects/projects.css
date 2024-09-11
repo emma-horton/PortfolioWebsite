@@ -4771,6 +4771,59 @@ input, select, textarea {
         font-style: italic; /* Optional: Style for the caption */
         padding: 10px 0; /* Optional: Add some padding around the caption */
     }
+
+	ul.custom-bullets-accomplishments {
+		list-style: none; /* Remove default bullets */
+		padding: 0;
+	}
+	ul.custom-bullets-accomplishments li {
+		padding-left: 20px; /* Provide space for custom bullet */
+		padding-right: 20px;
+		position: relative;
+	}
+	ul.custom-bullets-accomplishments li::before {
+		content: '✅'; /* Your custom symbol */
+		position: absolute;
+		left: 0; /* Align symbol to the left of the text */
+		top: 0; /* Adjust top position for alignment */
+		color: green; /* You can specify color if needed */
+		font-size: 18px; /* Adjust the size of the symbol */
+	}
+
+	ul.custom-bullets-challenges {
+		list-style: none; /* Remove default bullets */
+		padding: 0;
+	}
+	ul.custom-bullets-challenges li {
+		padding-left: 20px; /* Provide space for custom bullet */
+		position: relative;
+	}
+	ul.custom-bullets-challenges li::before {
+		content: '🔹'; /* Your custom symbol */
+		position: absolute;
+		left: 0; /* Align symbol to the left of the text */
+		top: 0; /* Adjust top position for alignment */
+		color: green; /* You can specify color if needed */
+		font-size: 18px; /* Adjust the size of the symbol */
+	}
+
+
+	ul.custom-bullets-whats-next {
+		list-style: none; /* Remove default bullets */
+		padding: 0;
+	}
+	ul.custom-bullets-whats-next li {
+		padding-left: 20px; /* Provide space for custom bullet */
+		position: relative;
+	}
+	ul.custom-bullets-whats-next li::before {
+		content: '◼️'; /* Your custom symbol */
+		position: absolute;
+		left: 0; /* Align symbol to the left of the text */
+		top: 0; /* Adjust top position for alignment */
+		color: green; /* You can specify color if needed */
+		font-size: 18px; /* Adjust the size of the symbol */
+	}
 	.recommended-books {
 		width: 100%;
 		padding: 20px;
