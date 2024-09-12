@@ -3711,9 +3711,9 @@ input, select, textarea {
 					-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 					transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 					display: block;
-					font-size: 0.8rem;
+					font-size: 1rem;
 					outline: none;
-					padding: 0 2rem;
+					padding: 0 2.5rem;
 				}
 
 					#nav ul.links li a:hover {
@@ -4860,4 +4860,8 @@ input, select, textarea {
 	
 	.recommended-books .book a:hover {
 		background-color: #0056b3;
+	}
+	#header {
+		height: 60px; 
+		line-height: 60px; 
 	}

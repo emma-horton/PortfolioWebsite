@@ -2546,4 +2546,21 @@ input, select, textarea {
 	/* #portfolio {
 		min-height: 2000px;  /* Adjust this value based on your layout 
 	}*/
+input[type="submit"],
+input[type="reset"] {
+	background-color: white;  /* Set your desired background color */
+	color: black;  /* Set the text color */
+	border: none;  /* Customize border if needed */
+	padding: 10px 20px;  /* Adjust padding for consistent look */
+	font-size: 16px;  /* Ensure consistent font size across devices */
+	cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+	background-color: pink;  /* Add hover effect if needed */
+}
+	
+
+	
 	 
