@@ -144,3 +144,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+//handle hovercard on projects for mobile
+// Select all the tiles
+const tiles = document.querySelectorAll('.box.style2');
+
+// Add touch/click event to each tile
+tiles.forEach(tile => {
+    tile.addEventListener('click', function (e) {
+        // Toggle the 'active' class to show/hide the hover card
+        this.classList.toggle('active');
+        
+        // Close the hover card if clicking outside the tile
+        document.addEventListener('click', function(event) {
+            if (!tile.contains(event.target)) {
+                tile.classList.remove('active');
+            }
+        }, { once: true });
+    });
+});
