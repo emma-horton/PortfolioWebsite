@@ -2543,4 +2543,7 @@ input, select, textarea {
 	.button-container a.button {
         margin-right: 10px; /* Adjust the margin as needed */
     }
-	
+	/* #portfolio {
+		min-height: 2000px;  /* Adjust this value based on your layout 
+	}*/
+	 

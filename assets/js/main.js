@@ -70,36 +70,36 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 });
 
-// Show more content when the user clicks the 'See more' button
-document.addEventListener('DOMContentLoaded', function () {
-	const seeMoreBtn = document.getElementById('seeMoreBtn');
-	const seeLessBtn = document.getElementById('seeLessBtn');
-	const hideableBoxes = document.querySelectorAll('.hideable');
+// // Show more content when the user clicks the 'See more' button
+// document.addEventListener('DOMContentLoaded', function () {
+// 	const seeMoreBtn = document.getElementById('seeMoreBtn');
+// 	const seeLessBtn = document.getElementById('seeLessBtn');
+// 	const hideableBoxes = document.querySelectorAll('.hideable');
 
-	// Show more content when 'See more' is clicked
-	seeMoreBtn.addEventListener('click', function (e) {
-		e.preventDefault();
+// 	// Show more content when 'See more' is clicked
+// 	seeMoreBtn.addEventListener('click', function (e) {
+// 		e.preventDefault();
 
-		hideableBoxes.forEach(box => {
-			box.style.display = 'block';  // Show hidden blog posts
-		});
+// 		hideableBoxes.forEach(box => {
+// 			box.style.display = 'block';  // Show hidden blog posts
+// 		});
 
-		seeMoreBtn.style.display = 'none';  // Hide 'See more' button
-		seeLessBtn.style.display = 'inline-block';  // Show 'See less' button
-	});
+// 		seeMoreBtn.style.display = 'none';  // Hide 'See more' button
+// 		seeLessBtn.style.display = 'inline-block';  // Show 'See less' button
+// 	});
 
-	// Hide content when 'See less' is clicked
-	seeLessBtn.addEventListener('click', function (e) {
-		e.preventDefault();
+// 	// Hide content when 'See less' is clicked
+// 	seeLessBtn.addEventListener('click', function (e) {
+// 		e.preventDefault();
 
-		hideableBoxes.forEach(box => {
-			box.style.display = 'none';  // Hide extra blog posts
-		});
+// 		hideableBoxes.forEach(box => {
+// 			box.style.display = 'none';  // Hide extra blog posts
+// 		});
 
-		seeMoreBtn.style.display = 'inline-block';  // Show 'See more' button
-		seeLessBtn.style.display = 'none';  // Hide 'See less' button
-	});
-});
+// 		seeMoreBtn.style.display = 'inline-block';  // Show 'See more' button
+// 		seeLessBtn.style.display = 'none';  // Hide 'See less' button
+// 	});
+// });
 
 // dyanmically create filter buttons
 document.addEventListener('DOMContentLoaded', function() {
@@ -131,18 +131,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add event listener to filter buttons
     filterContainer.addEventListener('click', function(e) {
-        if (e.target.tagName === 'BUTTON') {
-            const filter = e.target.getAttribute('data-filter');
-            projects.forEach(project => {
-                const tags = project.getAttribute('data-tags') ? project.getAttribute('data-tags').split(',').map(tag => tag.trim()) : [];
-                if (filter === 'all' || tags.includes(filter)) {
-                    project.style.display = 'block';
-                } else {
-                    project.style.display = 'none';
-                }
-            });
-        }
-    });
+		if (e.target.tagName === 'BUTTON') {
+			e.preventDefault();  // Prevent default button behavior
+			const filter = e.target.getAttribute('data-filter');
+			projects.forEach(project => {
+				const tags = project.getAttribute('data-tags') ? project.getAttribute('data-tags').split(',').map(tag => tag.trim()) : [];
+				if (filter === 'all' || tags.includes(filter)) {
+					project.style.display = 'block';
+				} else {
+					project.style.display = 'none';
+				}
+			});
+	
+			// Scroll to the portfolio section after filtering
+			const portfolioSection = document.getElementById('portfolio');
+			if (portfolioSection) {
+				portfolioSection.scrollIntoView({ behavior: 'smooth' });
+			}
+		}
+	});
 });
 
 //handle hovercard on projects for mobile
