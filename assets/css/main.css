@@ -2510,6 +2510,7 @@ input, select, textarea {
 
 	/* Ensure there's space between the description and the button */
 	.hover-card p {
+		text-shadow: none;
 		margin-bottom: 15px; /* Space between description and button */
 	}
 
@@ -2528,6 +2529,7 @@ input, select, textarea {
 		text-decoration: none;
 		border-radius: 5px;
 		display: inline-block;
+		text-shadow: none;
 	}
 
 	/* Hover effect for buttons inside .button-container */
