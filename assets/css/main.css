@@ -2562,7 +2562,27 @@ input[type="submit"]:hover,
 input[type="reset"]:hover {
 	background-color: pink;  /* Add hover effect if needed */
 }
-	
 
-	
-	 
+	/* Default style for buttons */
+#filters button {
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Style when a button is hovered */
+#filters button:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+/* Style for the selected button (active) */
+#filters button.active {
+    background-color: #007BFF;
+    color: white;
+    border-color: #007BFF;
+}
