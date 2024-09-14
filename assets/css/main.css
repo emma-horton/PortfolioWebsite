@@ -2586,3 +2586,7 @@ input[type="reset"]:hover {
     color: white;
     border-color: #007BFF;
 }
+
+#large-projects {
+    background-color: white; /* Set background to white */
+}
