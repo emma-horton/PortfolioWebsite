@@ -33,74 +33,6 @@
 
 })(jQuery);
 
-// Allow the user to filter projects by tag
-// Wait until the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function () {
-	const filterButtons = document.querySelectorAll('#filters button');
-	const boxes = document.querySelectorAll('.project');
-
-	console.log(filterButtons);
-	console.log(boxes);
-
-	filterButtons.forEach(button => {
-		button.addEventListener('click', function () {
-			const filter = this.getAttribute('data-filter');
-			console.log(filter);
-
-			boxes.forEach(box => {
-				const tags = box.getAttribute('data-tags');
-				console.log(tags);
-
-				if (tags) {
-					const cleanedTags = tags.replace(/\s+/g, '').split(',');
-					console.log(cleanedTags); // This will show the array of tags after cleaning
-
-					// Show box if 'all' is selected or if the tag matches
-					if (filter === 'all' || cleanedTags.includes(filter)) {
-						box.style.display = 'block';
-					} else {
-						box.style.display = 'none';
-					}
-				} else {
-					console.log('No data-tags found for this box.');
-					box.style.display = 'none'; // Hide the box if no tags are found
-				}
-			});
-		});
-	});
-});
-
-// // Show more content when the user clicks the 'See more' button
-// document.addEventListener('DOMContentLoaded', function () {
-// 	const seeMoreBtn = document.getElementById('seeMoreBtn');
-// 	const seeLessBtn = document.getElementById('seeLessBtn');
-// 	const hideableBoxes = document.querySelectorAll('.hideable');
-
-// 	// Show more content when 'See more' is clicked
-// 	seeMoreBtn.addEventListener('click', function (e) {
-// 		e.preventDefault();
-
-// 		hideableBoxes.forEach(box => {
-// 			box.style.display = 'block';  // Show hidden blog posts
-// 		});
-
-// 		seeMoreBtn.style.display = 'none';  // Hide 'See more' button
-// 		seeLessBtn.style.display = 'inline-block';  // Show 'See less' button
-// 	});
-
-// 	// Hide content when 'See less' is clicked
-// 	seeLessBtn.addEventListener('click', function (e) {
-// 		e.preventDefault();
-
-// 		hideableBoxes.forEach(box => {
-// 			box.style.display = 'none';  // Hide extra blog posts
-// 		});
-
-// 		seeMoreBtn.style.display = 'inline-block';  // Show 'See more' button
-// 		seeLessBtn.style.display = 'none';  // Hide 'See less' button
-// 	});
-// });
-
 // dyanmically create filter buttons
 document.addEventListener('DOMContentLoaded', function() {
     const projects = document.querySelectorAll('.col-4');  // Updated class name for project containers
@@ -134,6 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		if (e.target.tagName === 'BUTTON') {
 			e.preventDefault();  // Prevent default button behavior
 			const filter = e.target.getAttribute('data-filter');
+			// Ensure that 'projects' only contains elements with the class 'project'
+			const projects = document.querySelectorAll('.project');
 			projects.forEach(project => {
 				const tags = project.getAttribute('data-tags') ? project.getAttribute('data-tags').split(',').map(tag => tag.trim()) : [];
 				if (filter === 'all' || tags.includes(filter)) {
