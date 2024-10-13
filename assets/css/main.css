@@ -2464,7 +2464,7 @@ input[type="submit"],
 input[type="reset"] {
 	background-color: #3396ff;  /* Set your desired background color */
 	border-radius: 5px;  /* Add rounded corners */
-	color: black;  /* Set the text color */
+	color: white;  /* Set the text color */
 	border: none;  /* Customize border if needed */
 	padding: 10px 20px;  /* Adjust padding for consistent look */
 	font-size: 16px;  /* Ensure consistent font size across devices */
