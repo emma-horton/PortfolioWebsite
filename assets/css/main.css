@@ -1558,15 +1558,15 @@ form ::-webkit-input-placeholder {
 }
 
 form :-moz-placeholder {
-	color: white !important;
+	color: #555 !important;
 }
 
 form ::-moz-placeholder {
-	color: white !important;
+	color: #555 !important;
 }
 
 form :-ms-input-placeholder {
-	color: white !important;
+	color: #555 !important;
 }
 
 form ::-moz-focus-inner {
