@@ -2606,3 +2606,21 @@ input[type="reset"]:hover {
     border: 1px solid lightgray; /* Set a consistent border */
     box-sizing: border-box; /* Ensure padding is included inside the border */
 }
+.project-people {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Add space between the project details and the icon */
+    font-size: 1.1em;
+}
+
+.project-people i {
+    color: #3396ff; /* Set the color of the icon */
+    margin-right: 5px; /* Space between the icon and the text */
+}
+
+.project-people span {
+    color: #333; /* Color of the text */
+}
+.project .box {
+    height: 425px; /* Fixed height to ensure consistency */
+}
