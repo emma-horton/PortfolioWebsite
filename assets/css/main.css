@@ -2624,3 +2624,9 @@ input[type="reset"]:hover {
 .project .box {
     height: 425px; /* Fixed height to ensure consistency */
 }
+
+#headerid {
+	color: white;
+    position: relative;
+    z-index: 1; /* Ensure the image is in front of the particles */
+}
