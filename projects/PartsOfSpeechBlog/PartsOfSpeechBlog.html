@@ -52,23 +52,19 @@
 									<p>Comparing the accuracy of part-of-speech tagging using the Eager, Viterbi, and Individually Most Probable Tags algorithms across English, Korean, and Swedish.</p>
 									<p>By Emma Horton</p>
 								</header>
-								<!-- <div class="image main"><img src="../images/pic01.jpg" alt="" /></div>
-								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur sapien risus, commodo eget turpis at, elementum convallis enim turpis, lorem ipsum dolor sit amet nullam.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus. Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum.</p> -->
+								
 								<body>
 									<div class="container">
-										<!-- <div class="video-container">
-											<iframe width="560" height="315" src="https://www.youtube.com/embed/nWtM6fK3z8U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-										</div> -->
+					
 										<section class="section introduction">
 											<h2>Introduction</h2>
-											<p>In the realm of computational linguistics, understanding each word’s grammatical role through Part-of-Speech (POS) tagging is essential. This process not only aids in syntactic parsing but is also vital for applications such as machine translation and information extraction. For my recent project in the ‘Language and Computation’ module at the University of St Andrews, I delved into the Viterbi algorithm and its efficacy in POS tagging. I aimed to implement and evaluate the Viterbi algorithm alongside two related methods—the Eager and Individually Most Probable Tags algorithms. I compared their effectiveness across three languages—English, Korean, and Swedish—to uncover insights into their morphological and syntactic characteristics.</p>
+											<p>What’s the difference between “run” as in “I run every day” and “run” as in “a run in my stocking”? Humans understand these nuances effortlessly, but teaching a computer to do the same is a complex problem. The key lies in Part-of-Speech (POS) tagging, the process of identifying the grammatical role of each word. This fundamental task underpins countless Natural Language Processing (NLP) applications, from machine translation to sentiment analysis. In this article, we’ll take a deep dive into POS tagging, comparing the performance of three different algorithms — the Eager, Viterbi, and Individually Most Probable Tags algorithms — across the diverse linguistic landscapes of English, Korean, and Swedish. I’ll begin by discussing the data used in my experiments, then explore each of the algorithms in detail. Following that, I’ll present and analyse the results for each language, and finally, reflect on the key challenges and learnings from this project. So what are you waiting for? Let’s get started!</p>
 										</section>
 										<section class="section data preparation">
 											<h2>Diving into Data: Setting the Stage for POS Tagging</h2>
-											<p>In my journey through computational linguistics, the first step was to gather the right data. I turned to the <a href="https://universaldependencies.org">Universal Dependancies Treebanks</a>, a rich source of linguistically annotated text, and used the conllu Python package to meticulously parse and divide this data into training and test sets. Picture this: each sentence neatly arranged into a 2D list, each word tagged not just with its part of speech but also with markers at both the beginning and the end. Why? To capture those crucial boundary effects that can make or break the transition probability calculations.
+											<p>The first step was to gather the right data. To do this, I turned to the <a href="https://universaldependencies.org">Universal Dependancies Treebanks</a>, a rich source of linguistically annotated text. For this project, I selected datasets from the Universal Dependencies Treebank: approximately 47,000 sentences each for English and Korean, and 12,200 sentences for Swedish. These datasets were chosen to explore the challenges of POS tagging across typologically diverse languages.</p> 
 
-												From there, it was all about the numbers. I calculated transmission probabilities by tallying the frequency of POS bigrams, applying Witten-Bell smoothing to deal with the data sparsity. Emission probabilities followed, based on how frequently each word appeared with a particular tag. And to top it all off, I determined the probability of each POS tag starting off a sentence, setting the stage for what was to come. This meticulous preparation was foundational, ensuring that the algorithms had a solid base to work from and promising more accurate tagging results.</p>
+											<p>To preprocess the data I firstly, I used the conllu Python package to parse and divide the data into training and testing sets splitting them into sets of an 80/20 split. Then, I structured each sentence as a list of word-tag pairs, including start and end sentence markers, to capture boundary effects crucial for accurate transition probability calculations. Next, the transition and emission probabilities were calculated. I calculated transmission probabilities by tallying the frequency of POS bigrams, applying Witten-Bell smoothing to handle potential data sparsity. Emission probabilities followed, based on how frequently each word appeared with a particular tag. Finally, I calculated the probability of each POS tag starting a sentence. This preprocessing was essential for accurate algorithm training and provided a solid foundation for our analysis.</p>
 										</section>
 									
 										<section class="section algorithms">
@@ -91,11 +87,7 @@
 											</ul>
 
 											<p>In essence, for each word, the algorithm selects the tag that maximizes the combination of how well it fits with the previous tag and how well it matches the current word.</p>
-											<!-- <p>🔨 To maximize our workflow, all of our documentation was in Figma and shared Google Drive. We met regularly over Zoom and Discord to brainstorm on FigJam and to communicate the next steps in our process. We agreed on a timeline in which we would complete the project</p>
-											<figure>
-												<img src="images/project_timeline.png" alt="Project Timeline">
-												<figcaption>Project timeline.</figcaption>
-											</figure> -->
+								
 											<h3>The Viterbi Algorithm</h3>
 											<p>Moving on to the Viterbi algorithm, things get a bit more intricate. This algorithm isn’t satisfied with just the immediate context; it looks at the entire sentence to decide the sequence of tags that makes the most sense. In my script, I implement this within the <code>viterbi_algorithm</code> function. It begins by filling a matrix with log probabilities for the first word across all possible tags. It then iterates over each word in the sentence, updating the matrix based on the transition probabilities, emission probabilities, and previously computed log probabilities. Finally, it backtracks from the last word to determine the most probable sequence of tags. To avoid the pitfalls of multiplying very small probabilities—which can cause numerical underflow—I use log probabilities instead. By transforming probabilities into log space, multiplication operations become additions, significantly mitigating the underflow risk. This approach is critical for the Viterbi algorithm's reliability, especially in processing long sentences where the product of many small probabilities would otherwise approach zero.</p>
 											<p>Now let's break down the formula that the Viterbi algorithm uses to find the most likely sequence of tags for a given sentence:</p>
@@ -133,14 +125,11 @@
 
 											<p>This formula ensures that we not only consider the context of each word but also maximize the probability of each individual tag, making it a highly robust tagging method.</p>
 										</section>
-										<!-- <section class="section solution">
-											<h2>So what did the final product look like?</h2>
-											<p>The final product, CashSmart, emerged as a fully interactive and clickable mobile app prototype. It offers users a gamified learning environment to enhance financial literacy through engaging modules and video content. Within the app, users can set and track financial goals, monitor their personal finances, and make informed financial decisions. CashSmart also cultivates a supportive community, allowing users to connect, share insights, and support one another, making it not just a tool for financial management but a platform for collaborative growth and empowerment in financial well-being.</p>
-										</section> -->
+						
 										
 										<section class="section evaluation">
 											<h2>Measuring Success: How The Algorithms Stacked Up</h2>
-											<p>When it came to evaluating the algorithms’ performance, accuracy was my guiding star. This straightforward metric was calculated by comparing each algorithm’s predicted tags to the true tags from the test sets, measuring how often each algorithm got it right. I laid out the results in a simple table format, making it easy to see how each algorithm fared across different languages.</p>
+											<p>When evaluating the algorithms’ performance, I chose accuracy as the primary metric due to its ease of interpretability. Accuracy was calculated by comparing each algorithm’s predicted and true tags from the test sets. Here’s a snapshot of how each algorithm performed:</p>
 
 											<p>Here’s a snapshot of how each algorithm performed:</p>
 											<table border="1">
@@ -174,31 +163,23 @@
 												</tbody>
 												
 											</table>
-											<!-- <caption><strong>Figure 1</strong> – Table of accuracy scores for each algorithm in each given language.</caption> -->
-											<p>Interestingly, the Individually Most Probable Tags algorithm did not surpass the Viterbi algorithm in performance as I had originally anticipated. This result hints at possible implementation issues, warranting a thorough reevaluation to pinpoint any errors or missteps. Consequently, this algorithm was not included in the final discussion.</p>
+									
+											<p>Interestingly, the Individually Most Probable Tags algorithm did not outperform the Viterbi algorithm as initially anticipated. This outcome suggests potential implementation issues, likely stemming from the absence of transitions to the end-of-sentence marker in the forward algorithm and to the start-of-sentence marker in the backward algorithm. As a result, this algorithm was excluded from the final discussion.</p>
 										</section>
 										
 										<section class="section discussion">
-											<h2>Deep Dive: Analyzing Algorithm Performance and Linguistic Challenges</h2>
+											<h2>Deep Dive: Analyzing Algorithm Performance and Linguistic Nuances</h2>
 
-											<h3>Comparing the Performance of Two Algorithms.</h3>
+											<p>The Viterbi algorithm really shined for English and Swedish, offering accuracy boosts of 2.7% and 4.5% over the Eager algorithm. Why? It’s because Viterbi looks at the whole sentence when tagging, which works beautifully for languages with stricter word order. Swedish, too, benefits from this big-picture approach. But Korean was a different story. The Viterbi algorithm actually performed 1.6% worse than the Eager algorithm. Korean is what we call an “agglutinative language.” Think of words in Korean as building blocks — each word can stack multiple grammatical pieces onto itself. For example, a single word in Korean, like “먹었습니다” (meogeotseumnida), can include the verb root (“eat”), tense (“past”), and politeness level — all packed into one. This richness makes each word carry a lot of information, so even a simpler algorithm like Eager can figure out the tagging without needing to look at the entire sentence. On top of that, Korean’s word order is more flexible. For instance, “I apple ate” and “I ate apple” can both mean the same thing. This flexibility means Viterbi doesn’t gain as much from analysing the whole sentence — it’s almost like having extra tools you don’t really need adding unnecessary complexity.</p>
 
-											<b>Why Viterbi Performs Well in English and Swedish, but Falls Short in Korean.</b>
-											<p>English and Swedish both thrive under the Viterbi algorithm, which excels by considering the full context of a sentence. These languages rely on strict word order to define grammatical roles, making Viterbi’s sentence-wide analysis highly effective. However, Korean presents a different challenge. As an agglutinative language, Korean packs a lot of grammatical information directly into word forms through affixes, providing strong independent cues for POS tagging. The flexible word order in Korean reduces the need for a detailed sentence-wide analysis, which is why Viterbi doesn’t perform as well here.</p>
-
-											<!-- <h4>Eager Algorithm had relatively high accuracy across all languages.</h4>
-											<p>The UD Treebank, used for our data, is relatively coarse as it features only 17 tags per language. These tags are grouped into universal categories rather than being language-specific, simplifying the tagging process. With fewer tags to choose from, the probability of correctly identifying a tag increases, making a simpler model like the Eager Algorithm more effective. This model does not need to discern fine morphological distinctions, thereby enhancing the emission probability for each tag and clarifying transition probabilities between tags.</p> -->
 
 											<h3>Comparing Performance Across Languages.</h3>
+											<p>English was the easiest for both algorithms to handle, achieving top accuracy scores of 91.3% with Viterbi and 88.6% with Eager. Why? English is a straightforward language when it comes to morphology — there aren’t many word endings or affixes to complicate things. For example, “run” stays the same whether you’re talking about running yesterday or tomorrow (aside from adding an auxiliary verb). On top of that, English has a rigid word order. Sentences can’t be rearranged without changing the meaning. This rigidity plays right into Viterbi’s strengths because it thrives on predictable structures.</p>
 
-											<b>English Shows the Highest Accuracy Overall.</b>
-											<p>English’s straightforward morphology, especially when compared to Swedish and Korean, makes it easier for the algorithms to tag accurately. With fewer inflections and affixes to handle, the task is simplified. Plus, the rigid sentence structure in English helps create predictable word sequences, something both the Viterbi and Eager algorithms can easily take advantage of for more reliable tagging results.</p>
-
-											<b>The Challenge with Swedish: A Case for the Viterbi Algorithm.</b>
-											<p>While Swedish isn’t as morphologically complex as Korean, it does have more inflections than English and allows for greater sentence structure variation. This is where the Viterbi algorithm shines. Its ability to analyze entire sentence structures makes it particularly suited for languages like Swedish, where understanding long-distance dependencies between words and tags is key. In comparison, the Eager algorithm struggles to capture these nuances, giving Viterbi the edge.</p>
+											<p>Swedish stood out with the biggest boost in accuracy when switching from Eager to Viterbi, improving by 4.5%. Swedish uses more word endings, or inflections, than English, which provide important clues about a word’s grammatical role. For instance, “katten” means “the cat,” indicating a definite noun, while “katts” means “cat’s,” showing possession. Viterbi’s ability to analyse the entire sentence allows it to piece together these inflectional clues and understand their relationships, giving it an advantage over the Eager algorithm, which focuses only on one word and its immediate context.</p>
 											
-											<h3>Unpacking the Challenges of POS Tagging For Korean</h3>
-											<p>Korean posed a significant challenge in POS tagging, with lower accuracy compared to English and Swedish. This is largely due to Korean’s agglutinative nature, where words are formed and grammatical relationships are expressed through numerous affixes. This creates a wide range of possible word forms from a single root, making the tagging process more complex. On the other hand, English and Swedish, being analytical languages, have simpler morphologies. With fewer word forms to manage, it’s much easier to categorize and tag them, leading to higher accuracy.</p>
+											<h3>A note on the Universal Dependencies Treebank dataset</h3>
+											<p>Interestingly, the Eager algorithm performed surprisingly well across all three languages, achieving accuracy scores of 88.6% for English, 85.7% for Swedish, and 80.8% for Korean. Why did it do so well? One reason is the Universal Dependencies Treebank, which simplifies tagging by grouping similar tags into just 17 universal categories. For example, instead of having dozens of tags for different verb forms, the Treebank uses one broad "verb" category. This simplification makes it easier for even a straightforward algorithm like the Eager to predict tags accurately.</p>
 										
 											<h2>My Reflections </h2>
 											<h3>Key challenges</h3>
@@ -215,28 +196,35 @@
 											<ul>
 												<li><strong>Viterbi vs. Eager Algorithm:</strong>
 													<ul>
-														<li>Viterbi performed better in Swedish and English.</li>
-														<li>Eager had slightly better results in Korean.</li>
+														<li>The Viterbi algorithm performed better in Swedish and English, leveraging its ability to analyse entire sentence contexts effectively.</li>
+														<li>The Eager algorithm slightly outperformed the Viterbi algorithm in Korean, relying on rich morphological cues encoded in individual words.</li>
 													</ul>
 												</li>
 												<li><strong>Language Accuracy Rankings:</strong>
 													<ul>
-														<li>Highest accuracy observed in English.</li>
-														<li>Swedish showed significant improvement with the Viterbi algorithm.</li>
-														<li>Korean exhibited the lowest accuracy.</li>
+														<li>English had the highest accuracy for both algorithms, benefiting from simple morphology and rigid syntactic structure.</li>
+														<li>Swedish showed significant improvement with the Viterbi algorithm (4.5% higher accuracy than Eager), likely due to its flexible syntax and moderate morphological complexity.</li>
+														<li>Korean had the lowest accuracy across both algorithms due to its rich morphology and the limited utility of sentence-wide analysis in its syntax.</li>
 													</ul>
 												</li>
 												<li><strong>Effect of Morphology:</strong>
 													<ul>
-														<li>The simpler morphology in Swedish and English may explain better algorithm performance compared to the complex morphology of Korean.</li>
+														<li>Simpler morphology in English and Swedish facilitated easier tagging, as fewer word forms required recognition and categorisation.</li>
+														<li>Korean’s agglutinative nature introduced a vast number of possible word forms, complicating the POS tagging process for both algorithms.</li>
+													</ul>
+												</li>
+												<li><strong>Effect of Syntax:</strong>
+													<ul>
+														<li>Rigid syntax in English and Swedish, with strict word order defining grammatical roles, favoured the Viterbi algorithm’s sentence-wide analysis.</li>
+														<li>Flexible syntax in Korean, which allows more variation in word order, diminished the effectiveness of the Viterbi algorithm, as sentence-wide context provided less additional information for POS tagging.</li>
 													</ul>
 												</li>
 											</ul>
 										</section>
 										
 										<section class="section conclusion">
-											<h2>Looking ahead</h2>
-											<p>Looking ahead, there's a clear opportunity to tailor POS tagging algorithms more effectively for Korean. Leveraging its rich morphological features could enhance accuracy significantly. Ensuring robust POS tagging across all languages is crucial, as it lays the groundwork for more advanced natural language processing applications, from speech generation to language translation.</p>
+											<h2>Future Work</h2>
+											<p>Future work should prioritise the development of morphology-aware POS tagging models specifically designed for agglutinative languages. Perhaps this could involve incorporating morphological analysers to decompose words into their constituent morphemes, providing valuable information about grammatical function.  Additionally, exploring methods that can effectively capture long-range dependencies in Korean, despite its flexible word order, would be a valuable direction for future research. Such advancements could significantly improve POS tagging accuracy for Korean and other agglutinative languages such as Turkish, Finnish and Japanese.</p>
 										</section>
 
 										<section class="section try-it-out"> 
