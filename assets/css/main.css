@@ -2630,3 +2630,12 @@ input[type="reset"]:hover {
     position: relative;
     z-index: 1; /* Ensure the image is in front of the particles */
 }
+#featured-projects .col-4 {
+    flex: 0 0 48%; /* Each box takes 48% of the row's width, leaving space for margins */
+    box-sizing: border-box;
+    margin-bottom: 20px; /* Add spacing between rows */
+}
+#featured-projects .box {
+    height: 600px; /* Set the desired height */
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
