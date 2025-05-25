@@ -2411,6 +2411,7 @@ form ::-moz-focus-inner {
 		background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
 		color: white;
 		display: flex;
+		pointer-events: none;
 		flex-direction: column; /* Arrange items vertically */
 		justify-content: center; /* Center content vertically */
 		align-items: center; /* Center content horizontally */
@@ -2455,6 +2456,7 @@ form ::-moz-focus-inner {
 	/* Show the hover card on hover */
 	.box:hover .hover-card {
 		opacity: 1;
+		pointer-events: auto;
 	}
 
 	.button-container a.button {
@@ -2677,7 +2679,10 @@ input[type="reset"]:hover {
 }
 
 .swiper-slide {
+	visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
     flex-shrink: 0; /* Prevent slides from shrinking */
     width: auto; /* Ensure slides take up the correct width */
-    text-align: center; /* Center content inside slides */
+    text-align: center; Center content inside slides
 }
