@@ -2418,6 +2418,9 @@ form ::-moz-focus-inner {
 		opacity: 0;
 		transition: opacity 0.3s ease-in-out;
 		padding: 20px; /* Optional: Add some padding for spacing */
+		box-sizing: border-box; /* Include padding in width/height calculations */
+    	overflow: auto; /* Allow content to scroll if it overflows */
+    	transition: opacity 0.3s ease-in-out; /* Smooth transition for hover effect */
 	}
 
 	/* Ensure there's space between the description and the button */
@@ -2636,7 +2639,7 @@ input[type="reset"]:hover {
     margin-bottom: 20px; /* Add spacing between rows */
 }
 #featured-projects .box {
-    height: 540px; /* Set the desired height */
+    height: 500px; /* Set the desired height */
     overflow: hidden; /* Ensure content doesn't overflow */
 }
 .swiper-container {
