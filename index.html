@@ -14,6 +14,8 @@
 		<link rel="stylesheet" href="assets/css/header.css"/>
 		<link rel="icon" href="images/logos/favicon.ico" type="image/x-icon"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -23,7 +25,8 @@
 					<li><a href="#top">Top</a></li>
 					<li><a href="#work">About Me</a></li>
 					<li><a href="#large-projects">Publications</a></li>
-					<li><a href="#portfolio">Featured Projects</a></li>
+					<li><a href="#featured-projects">Featured Projects</a></li>
+					<li><a href="#portfolio">Open Source Projects</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
 			</nav>
@@ -91,13 +94,126 @@
 				</div>
 			</article>
 
-		
-		
-
-		<!-- Portfolio -->
-			<article id="portfolio" class="wrapper style3" style="background-color: white; background-image: none; color: black;">
+			<article id="featured-projects" class="wrapper style3" style="background-color: white;">
 				<header>
 					<h2>Featured Projects</h2>
+				</header>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<!-- Each project becomes a swiper-slide -->
+						<div class="swiper-slide">
+							<article class="box style2">
+								<a href="#" class="image featured">
+									<img src="images/create_run.jpeg" alt="" />
+								</a>
+								<h3><a href="#">Runnify</a></h3>
+								<div class="tags">
+									<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
+									<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
+									<img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB">
+									<img src="https://img.shields.io/badge/D3.js-F9A03C?style=for-the-badge&logo=d3dotjs&logoColor=white" alt="D3.js">
+									<img src="https://img.shields.io/badge/Chai-A30701?style=for-the-badge&logo=chai&logoColor=white" alt="Chai">
+									<img src="https://img.shields.io/badge/Mocha-8D6748?style=for-the-badge&logo=mocha&logoColor=white" alt="Mocha">
+								</div>
+								
+								<!-- Hover card content -->
+								<div class="hover-card">
+									<div class="project-people">
+										<i class="fas fa-users"></i> <!-- Font Awesome users icon -->
+										<span>5 contributers</span> <!-- Number of people involved -->
+									</div>
+									<p>A full-stack web application developed to help runners organize social running activities and track their progress over time.</p>
+									<div class="button-container">
+										<a href="https://github.com/emma-horton/Runnify" class="button">View on GitHub</a>
+										<a href="https://runnify-web-f2150b469ce7.herokuapp.com" class="button">Try it out</a>
+									</div>
+								</div>
+							</article>
+						</div>
+						<div class="swiper-slide">
+							<article class="box style2">
+								<a href="#" class="image featured">
+									<img src="images/CashSmart_user_flow.png" alt="" />
+								</a>
+								<h3><a href="#">Empowering Financial Literacy: Our Journey at the Athena Hackathon 2023</a></h3>
+								<div class="tags">
+									<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" alt="Figma">
+								</div>
+								<div class="hover-card">
+									<p>A mobile app designed to help young people to become financially literate. This project won the Athena Virtual Hackathon 2023.</p>
+									<div class="button-container">
+										<a href="https://medium.com/@emmahorton03/empowering-financial-literacy-our-journey-at-the-athena-hackathon-2023-0a4f86a5a69a" class="button">View blog post</a>
+										<a href="https://www.figma.com/proto/WDNrNuodpooCvJdBu37Qa2/Money-literacy-app" class="button">View prototype</a>
+									</div>
+								</div>
+							</article>
+						</div>
+						<div class="swiper-slide">
+							<article class="box style2">
+								<a href="#" class="image featured">
+									<img src="images/most_probable_tags.jpeg" alt="" />
+								</a>
+								<h3><a href="#">Decoding Language: A Deep Dive Into Part Of Speech Tagging With Dynamic Algorithms</a></h3>
+								<div class="tags">
+									<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+									<img src="https://img.shields.io/badge/NLTK-0052cc?style=for-the-badge" alt="NLTK">
+									<img src="https://img.shields.io/badge/ConLL--U-0052cc?style=for-the-badge" alt="ConLL-U">
+								</div>
+								
+								<!-- Hover card content -->
+								<div class="hover-card">
+									<div class="project-people">
+										<i class="fas fa-users"></i> <!-- Font Awesome users icon -->
+										<span>Individual project</span> <!-- Number of people involved -->
+									</div>
+									<p>Comparing the accuracy of part-of-speech tagging using the Eager, Viterbi, and Individually Most Probable Tags algorithms across English, Korean, and Swedish.</p>
+									<div class="button-container">
+										<a href="https://medium.com/@emmahorton03/decoding-language-a-deep-dive-into-part-of-speech-tagging-with-dynamic-algorithms-a4de473d8324?source=friends_link&sk=cc2b6d0d2382c80082c8bc9de7d3842e" class="button">View blog post</a>
+										<a href="https://github.com/emma-horton/PartsOfSpeech/blob/main/README.md" class="button">View on GitHub</a>
+									</div>
+								</div>
+							</article>
+						</div>
+						<div class="swiper-slide">
+							<article class="box style2">
+								<a href="#" class="image featured">
+									<img src="images/pantheon_viz.jpeg" alt="" />
+								</a>
+								<h3><a href="#">How Visualisations Reveal Centuries Of Change In Birthplace, Occupation, And Gender Of Famous Figures</a></h3>
+								<div class="tags">
+									<img src="https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white" alt="Tableau">
+								</div>
+								
+								<!-- Hover card content -->
+								<div class="hover-card">
+									<div class="project-people">
+										<i class="fas fa-users"></i> <!-- Font Awesome users icon -->
+										<span>Individual project</span> <!-- Number of people involved -->
+									</div>
+									<p>A dashboard designed to illustrate the changes in birthplaces, occupations, and gender of notable individuals spanning from 3600 BC to 2100 AD.</p>
+									<div class="button-container">
+										<a href="https://medium.com/@emmahorton03/how-visualisations-reveal-centuries-of-change-in-birthplace-occupation-and-gender-of-famous-fc3647dbbc58" class="button">View blog post</a>
+										<a href="https://public.tableau.com/app/profile/emma.horton3180/viz/VisualisingHistoricalTrendsinOccupationBirthplacesandGenderRatiosofNotableIndividuals/Dashboard2" class="button">View visualisation</a>
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+					<!-- Navigation buttons container -->
+					<div class="swiper-navigation">
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-button-next"></div>
+					</div>
+				</div>
+			</article>
+
+
+
+		<!-- Portfolio -->
+
+			<article id="portfolio" class="wrapper style3" style="background-color: white;">
+				<header>
+					<h2>Open Source Projects and Articles</h2>
 					<div id="filters">
 						<!-- <button data-filter="all">All</button>
 						<button data-filter="design">Design</button>
@@ -127,10 +243,89 @@
 										<i class="fas fa-users"></i> <!-- Font Awesome users icon -->
 										<span>5 contributers</span> <!-- Number of people involved -->
 									</div>
-									<p>A full-stack web application developed to help runners organize social running activities and track their progress over time.</p>
+									<p>A full-stack web application developed to help runners organise social running activities and track their progress over time.</p>
 									<div class="button-container">
 										<a href="https://github.com/emma-horton/Runnify" class="button">View on GitHub</a>
 										<a href="https://runnify-web-f2150b469ce7.herokuapp.com" class="button">Try it out</a>
+									</div>
+								</div>
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small project" data-tags="Application development">
+							<article class="box style2">
+								<a href="#" class="image featured">
+									<img src="images/fitness_friends.jpeg" alt="" />
+								</a>
+								<h3><a href="#">Fitness Friends</a></h3>
+								<div class="tags">
+									<img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white" alt="Java">
+									<img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" alt="Spring Boot">
+								</div>
+								
+								<!-- Hover card content -->
+								<div class="hover-card">
+									<div class="project-people">
+										<i class="fas fa-users"></i> <!-- Font Awesome users icon -->
+										<span>Individual project</span> <!-- Number of people involved -->
+									</div>
+									<p>A virtual pet application designed to make fitness tracking fun and engaging. By integrating with the Strava API, the app allows users to set goals, and care for a virtual pet whose health and behavior are influenced by the user's progress.</p>
+									<div class="button-container">
+										<a href="https://github.com/emma-horton/FitnessFriendsSpringBoot" class="button">View on GitHub</a>
+									</div>
+								</div>
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small project" data-tags="Data science">
+							<article class="box style2">
+								<a href="#" class="image featured">
+									<img src="images/ml_liver_cirrhosis.jpeg" alt="" />
+								</a>
+								<h3 style="font-size: 21px;"><a href="#">Machine Learning for Liver Cirrhosis Prognosis</a></h3>
+								<div class="tags">
+									<img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
+									<!-- <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy"> 
+									<img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white" alt="Matplotlib"> -->
+									<!-- <img src="https://img.shields.io/badge/Seaborn-2D3F6C?style=for-the-badge&logo=python&logoColor=white" alt="Seaborn">  -->
+									<img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
+									<img src="https://img.shields.io/badge/XGBoost-EC6608?style=for-the-badge&logo=python&logoColor=white" alt="XGBoost">
+									<img src="https://img.shields.io/badge/Imbalanced--learn-003366?style=for-the-badge&logo=python&logoColor=white" alt="Imbalanced-learn">
+								</div>
+								
+								<!-- Hover card content -->
+								<div class="hover-card">
+									<div class="project-people">
+										<i class="fas fa-users"></i> <!-- Font Awesome users icon -->
+										<span>Individual project</span> <!-- Number of people involved -->
+									</div>
+									<p>This project aims to leverage machine learning techniques to predict outcomes for patients with liver cirrhosis using clinical data.</p>
+									<div class="button-container">
+										<a href="https://github.com/emma-horton/Leveraging-Machine-Learning-to-Predict-Liver-Cirrhosis-Outcomes-from-Clinical-Data" class="button">View on GitHub</a>
+									</div>
+								</div>
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small project" data-tags="Data analysis">
+							<article class="box style2">
+								<a href="#" class="image featured">
+									<img src="images/signal_processing.jpeg" alt="" />
+								</a>
+								<h3 style="font-size: 21px;"><a href="#">Denoise & Segment: Signal and Image Processing</a></h3>
+								<div class="tags">
+									<img src="https://img.shields.io/badge/MATLAB-F0DB4F?style=for-the-badge&logo=mathworks&logoColor=black" alt="MATLAB">
+									<img src="https://img.shields.io/badge/FFT-007ACC?style=for-the-badge&logo=gnuplot&logoColor=white" alt="FFT">
+									<img src="https://img.shields.io/badge/K-means-FF6F61?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="K-means Clustering">
+									<img src="https://img.shields.io/badge/Image_Processing_Toolbox-007ACC?style=for-the-badge&logo=mathworks&logoColor=white" alt="Image Processing Toolbox">
+								</div>
+								
+								<!-- Hover card content -->
+								<div class="hover-card">
+									<div class="project-people">
+										<i class="fas fa-users"></i> <!-- Font Awesome users icon -->
+										<span>Individual project</span> <!-- Number of people involved -->
+									</div>
+									<p>This project leverages MATLAB to enhance audio by removing background noise and analyse images using k-means color segmentation and edge detection.</p>
+									<div class="button-container">
+										<a href="https://github.com/emma-horton/SignalProcessing" class="button">View on GitHub</a>
 									</div>
 								</div>
 							</article>
@@ -166,7 +361,7 @@
 								<a href="#" class="image featured">
 									<img src="images/viterbi_viz.jpeg" alt="" />
 								</a>
-								<h3><a href="#">Viterbi Visualizer</a></h3>
+								<h3><a href="#">Viterbi Visualiser</a></h3>
 								<div class="tags">
 									<img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
 									<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
@@ -180,9 +375,9 @@
 										<i class="fas fa-users"></i> <!-- Font Awesome users icon -->
 										<span>Individual project</span> <!-- Number of people involved -->
 									</div>
-									<p>An interactive visualization of the Viterbi algorithm for part of speech tagging.</p>
+									<p>An interactive visualisation of the Viterbi algorithm for part of speech tagging.</p>
 									<div class="button-container">
-										<a href="https://github.com/emma-horton/viterbi-visualizer" class="button">View on GitHub</a>
+										<a href="https://github.com/emma-horton/viterbi-visualiser" class="button">View on GitHub</a>
 									</div>
 								</div>
 							</article>
@@ -388,16 +583,40 @@
 					  }
 					}
 				  });
+
+				const swiper = new Swiper('.swiper-container', {
+					loop: true, // Enable looping
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					},
+					slidesPerView: 1, // Adjust based on your layout
+					spaceBetween: 20, // Space between slides
+					centeredSlides: false, // Ensure slides are not centered
+					breakpoints: {
+						640: {
+							slidesPerView: 1,
+						},
+						768: {
+							slidesPerView: 2,
+						},
+						1024: {
+							slidesPerView: 3,
+						},
+					},
+				});
 			</script>
 			<script>
-				const cursor = document.createElement('div');
-				cursor.id = 'cursor';
-				document.body.appendChild(cursor);
-
-				document.addEventListener('mousemove', function(e) {
-					cursor.style.left = e.clientX + 'px';
-					cursor.style.top = e.clientY + 'px';
-				});
+				if (!document.getElementById('cursor')) {
+					const cursor = document.createElement('div');
+					cursor.id = 'cursor';
+					document.body.appendChild(cursor);
+			
+					document.addEventListener('mousemove', function (e) {
+						cursor.style.left = e.clientX + 'px';
+						cursor.style.top = e.clientY + 'px';
+					});
+				}
 			</script>
 	</body>
 </html>
