@@ -2631,11 +2631,50 @@ input[type="reset"]:hover {
     z-index: 1; /* Ensure the image is in front of the particles */
 }
 #featured-projects .col-4 {
-    flex: 0 0 48%; /* Each box takes 48% of the row's width, leaving space for margins */
+    flex: 0 0 50%; /* Each box takes 48% of the row's width, leaving space for margins */
     box-sizing: border-box;
     margin-bottom: 20px; /* Add spacing between rows */
 }
 #featured-projects .box {
-    height: 600px; /* Set the desired height */
+    height: 540px; /* Set the desired height */
     overflow: hidden; /* Ensure content doesn't overflow */
+}
+.swiper-container {
+    position: relative;
+    overflow: visible; /* Ensure buttons are not clipped */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000; /* Ensure buttons are above other elements */
+    color: #000; /* Adjust color as needed */
+    visibility: visible;
+    opacity: 1;
+}
+
+.swiper-button-next {
+    right: 10px;
+}
+
+.swiper-button-prev {
+    left: 10px;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 20px;
+}
+.swiper-wrapper {
+    display: flex;
+    transition: transform 0.3s ease-in-out; /* Smooth slide transition */
+}
+
+.swiper-slide {
+    flex-shrink: 0; /* Prevent slides from shrinking */
+    width: auto; /* Ensure slides take up the correct width */
+    text-align: center; /* Center content inside slides */
 }
